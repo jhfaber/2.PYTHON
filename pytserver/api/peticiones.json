@@ -1,0 +1,26 @@
+{
+    "accountId": "512321",
+    "planCode": "sample-plan-code-001",
+    "description": "Sample Plan 001",
+    "interval": "MONTH",
+    "intervalCount": "1",
+    "maxPaymentsAllowed": "12",
+    "paymentAttemptsDelay": "1",
+    "additionalValues": [
+       {
+          "name": "PLAN_VALUE",
+          "value": "20000",
+          "currency": "COP"
+       },
+       {
+          "name": "PLAN_TAX",
+          "value": "3193",
+          "currency": "COP"
+       },
+       {
+          "name": "PLAN_TAX_RETURN_BASE",
+          "value": "16806",
+          "currency": "COP"
+       }
+    ]
+ }

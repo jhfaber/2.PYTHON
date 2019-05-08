@@ -1,0 +1,109 @@
+<legend>Lista de Deseos</legend>
+    <div>
+        <div id='div_lista_deseos'>
+
+            <div>
+                <span class='span2'>Deseo:</span>
+                <input type="text" name="txt_deseo" id="txt_deseo" style='margin: 3px';>
+            </div>
+
+            <div>
+
+                <span class='span2'>Descripccion:</span>
+                <textarea class='textarea1'  id="txt_descripcion"  ></textarea>
+<div id='div_ayuda'>
+  ${gl_html_consult}
+    <div id='div_ventana_ayuda'><span class='span3'><b>Como</b> Coordinador de Call Center, <b>quiero</b> un app donde pueda asignar a los agentes un listado de numero llamadas a realizar <b>para</b> mejorar la retencion de clientes. 
+</span>
+                        </div>
+                    </div>
+
+
+             <div>
+            <span class='span2'>Area: </span>
+            <select id='drp_area'  style='font-family: Tahoma;
+    font-size: 12px;'></select>
+            </div>
+
+
+            <div>
+             <span class='span2'>Objetivo: </span>
+            <select id='drp_objetivo' style='font-family: Tahoma;
+    font-size: 12px;'></select>
+            </div>
+
+           
+<div>
+            <span class='span2'>Ambito: </span>
+            <select id='drp_ambito' onchange='seleccion_perzonalizado()' style='font-family: Tahoma;
+                font-size: 12px;'></select>
+            </div>
+             <div id="div_seleccionar_usuarios" class='seleccionar'>
+                                <span class ='link' onclick='pinta_usuarios()'>Seleccione los usuarios </span>
+                        </div> 
+
+                        <div id='div_contenedor_usuarios' style='margin: 5px'></div>
+
+
+
+           
+        
+
+
+	<div  onclick="selecciona_archivo_g('archivos_-9999')" ondragover="return draghover_g('archivos_-9999')"
+                	ondragend="return dragend_g('archivos_-9999')"
+                     ondrop="return dropdiv_g('archivos_-9999')"
+                	id="div_adjuntos_papa_archivos_-9999" style="height: 150px; width:372px;
+                	display: inline-block; background-color: white; border:5px solid gainsboro ">
+                	<img id="imgadjunto_archivos_-9999" style="height: 150px; display:none;  margin:0 auto;">
+                	<div id="div_agrupa_archivos_-9999" style="top: 40px; position: relative; text-align:center">
+                    	<span style="font-family: Tahoma; font-size: 15px; color: gray; width:250px">
+                        	Hacer clic o arrastar archivos</span>
+                    	<div style="position: relative; left: 20px; width: 100%;">
+                        	<svg width="100px" height="100px" fill="gray" version="1.1" id="svg_anim" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 50 50" style="enable-background:new 0 0 27.793 27.793;" xml:space="preserve"><g>   
+                                    	<path d="M5.5,5.891c-0.906,0-1.643,0.736-1.643,1.646c0,0.908,0.736,1.646,1.643,1.646c0.91,0,1.646-0.738,1.646-1.646   	   	C7.146,6.627,6.41,5.891,5.5,5.891z"></path>
+                                       	<path d="M17.57,8.599c0.359,0.155,0.793,0.247,1.268,0.247c1.213,0,2.195-0.592,2.195-1.324c0-0.731-0.982-1.324-2.195-1.324      	c-0.455,0-0.879,0.083-1.227,0.227c-0.145-0.14-0.34-0.227-0.553-0.227h-0.32c-0.406,0-0.729,0.309-0.775,0.702      	c-0.984,0.103-1.711,0.458-1.711,0.884c0,0.507,1.023,0.916,2.293,0.916C16.914,8.699,17.26,8.661,17.57,8.599z"></path>	<path d="M24.254,11.952V2.965c0-0.268-0.217-0.488-0.49-0.488H0.496C0.221,2.477,0,2.697,0,2.965v20.139  	   	c0,0.27,0.221,0.491,0.496,0.491h15.455c1.254,1.072,2.879,1.722,4.658,1.722c3.967,0,7.184-3.215,7.184-7.183      	C27.793,15.498,26.369,13.201,24.254,11.952z M10.988,10.295C8.33,7.641,5.76,17.91,5.76,17.91H2.246V4.703h20.172v6.487     	c-0.578-0.151-1.182-0.24-1.809-0.24c-3.037,0-5.631,1.891-6.678,4.557C13.373,13.868,12.434,11.745,10.988,10.295z M20.609,23.724         	c-3.088,0-5.59-2.504-5.59-5.591s2.502-5.59,5.59-5.59s5.592,2.502,5.592,5.59S23.697,23.724,20.609,23.724z"></path>	<polygon points="21.584,14.223 19.197,14.223 19.197,16.944 16.42,16.944 16.42,19.331 19.197,19.331 19.197,22.132 21.584,22.132  	   	21.584,19.331 24.33,19.331 24.33,16.944 21.584,16.944   	"></polygon>	<g> </g>	<g>   	</g>	<g>  </g>	<g>  </g>	<g>  </g>	<g>  </g>	<g>  </g>	<g>  </g>	<g>   	</g>	<g>  </g>	<g>  </g>	<g>  </g>	<g>  </g>	<g>  </g>	<g>   	</g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g></svg></div>
+                  	<input multiple type="file" id="txtarchivo_archivos_-9999" onchange="cargafile_g('archivos_-9999')" style="display: none;"/>
+                	</div>
+ 
+ 
+                	<div id="div_adjuntos_archivos_-9999"></div>
+            	
+          	</div>
+         	<div id='div_lista_archivos'>
+
+         	</div>
+
+       
+           
+             <div style='margin-top:19px; cursor:pointer'>
+                                <span style='width:70px; display:inline; cursor:pointer margin-bottom: 3px;'
+                                           class='button grey' onclick='guardar_deseo()'>Crear Deseo</span>
+             </div> 
+
+        </div> 
+            
+    </div> 
+                    
+
+ 
+
+
+     <div id="div_modal_usuarios" class="modal fade">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <span style="font-weight:bold; font-family:Tahoma; color:#337ab7; font-size:14px;" >Usuarios</span>         
+                            </div>
+                            <div>
+                            <div class="modal-body">
+                                    <div class='grilla_nueva' id='div_usuarios'></div>
+                                    
+                                    </div>
+                          
+                             </div>
+ 
+                        </div>
+                    </div>
+             </div>    

@@ -1,0 +1,39 @@
+
+{
+    "DEFAULT": {
+        "API_LOGIN": "",
+        "API_KEY": "",
+        "ACCOUNTID" : "",
+        "MERCHANTID" : ""
+    },
+    "HOST" : {
+        "HOST": "api.payulatam.com",
+        "URL": "https://api.payulatam.com/payments-api/"
+        
+    },
+    "PLAN" : {
+        "CREATE":"/rest/v4.9/plans",
+        "UPDATE": "/rest/v4.9/plans/{}",
+        "READ":"/rest/v4.9/plans/{}",
+        "DELETE": "/rest/v4.9/plans/{}"
+    },
+    "CLIENT" : {
+        "CREATE":"/rest/v4.9/customers/",
+        "UPDATE": "/rest/v4.9/customers/{}",
+        "READ":"/rest/v4.9/customers/{}",
+        "DELETE": "/rest/v4.9/customers/{}"
+    },
+    "CREDIT_CARD": {
+        "CREATE":"/rest/v4.9/customers/{}/",
+        "UPDATE": "/rest/v4.9/creditCards/{}",
+        "READ":"/rest/v4.9/creditCards/{}",
+        "DELETE": "/rest/v4.9/customers/{}/creditCards/{}"
+    },
+    "SUSCRIPTION": {
+        "CREATE":"/rest/v4.9/subscriptions/",
+        "UPDATE": "/rest/v4.9/subscriptions/{}",
+        "READ":"/rest/v4.9/subscriptions/{}",
+        "DELETE": "/rest/v4.9/subscriptions/{}"
+    }
+    
+}
