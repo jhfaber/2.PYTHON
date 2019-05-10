@@ -8,8 +8,7 @@
 
  """
 
-import json, os
-import base64
+import json, os, sqlDao, base64
 
 CONF = '\\config.json'
 cwd = os.path.dirname(os.path.realpath(__file__)) + CONF
@@ -32,3 +31,9 @@ HEADER = {
 }
 
 # print(ENCODED+URL+HOST+ACCOUNDTID+API_KEY+API_LOGIN)
+
+######################### DB #####################################
+
+db = sqlDao.sqlDao()
+db.selectData()
+
