@@ -52,3 +52,17 @@ content=print(response.content)
 # print(res.decode('utf-8'))
 
 
+
+
+############################### DB ###########################
+""" storage =json.loads(response.content)
+string= '''INSERT INTO cliente VALUES (
+            \''''+str(storage['id'])+'''\'
+            )'''
+
+# print(string)
+settings.DB.db.execute(string)
+settings.DB.commit()
+settings.DB.closeConnection() """
+
+

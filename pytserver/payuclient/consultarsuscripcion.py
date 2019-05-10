@@ -17,7 +17,6 @@ print("Content-Type: text/json\n")
 
 import requests
 import json, settings
-from requests_toolbelt.utils import dump
 
 URL_API_PRODUCCION = settings.URL
 ENCODED= settings.ENCODED
@@ -29,18 +28,11 @@ HEADERS =settings.HEADER
 URL_CREACION= 'rest/v4.9/subscriptions/' 
 URL_CONSULTA= 'rest/v4.9/subscriptions/{}' #{susbcripcionID}
 ID_CLIENTE='284aa042ejtn'
-TOKEN = '09ab5af6-00f7-47c1-bdad-c6d124862e49'
+TOKEN = '81864378-fdcd-4f40-a431-e54bb50145a0'
 T_NUMERO='4323592726185547'
 PLAN_CODE = "1"
-ID_SUSCRIPCION= 'e83de8ep5wzm'
-ID_SUSCRIPCION2 ='f1cbe6dvmmg2'
-URL = URL_API_PRODUCCION+(URL_CREACION.format(ID_SUSCRIPCION2))
-
-
-
-
-
-############################# BUILD POST HEADERS ############################
+ID_SUSCRIPCION= 'e78cbj3spq3f'
+URL = URL_API_PRODUCCION+(URL_CREACION.format(ID_SUSCRIPCION))
 
 
 ################### ENVIO POST ######################

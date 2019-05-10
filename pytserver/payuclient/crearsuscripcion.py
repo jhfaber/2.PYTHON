@@ -17,7 +17,7 @@ print("Content-Type: text/json\n")
 
 import requests
 import json, settings
-from requests_toolbelt.utils import dump
+
 
 URL_API_PRODUCCION = settings.URL
 ENCODED= settings.ENCODED
@@ -29,19 +29,21 @@ HEADERS =settings.HEADER
 
 URL_CREACION= 'rest/v4.9/subscriptions/' 
 URL_CONSULTA= 'rest/v4.9/subscriptions/{}' #{susbcripcionID}
-ID_CLIENTE='284aa042ejtn'
-TOKEN = '09ab5af6-00f7-47c1-bdad-c6d124862e49'
-T_NUMERO='4323592726185547'
-PLAN_CODE = "2"
-ID_SUSCRIPCION: 'e83de8ep5wzm'
+
+#OBLIGATORIOS
+ID_CLIENTE='7b5951r6hwk3'
+TOKEN = '81864378-fdcd-4f40-a431-e54bb50145a0'
+PLAN_CODE = "20711"
+
+#URL
 URL = URL_API_PRODUCCION+URL_CREACION
 
 ##############BUILD BODY#################
 data = {
             "quantity": "1",
             "installments": "1",
-            "trialDays": "0",   
-            'immediatePayment': "true"                              
+            "trialDays": "1",   
+            #'immediatePayment': "true"                              
                 
         }
 customer = {
@@ -57,8 +59,6 @@ plan= {
 data['customer'] =customer
 data['plan']= plan
 
-
-# print(json.dumps(data, indent=4))
 ############################# BUILD POST HEADERS ############################
 
 data= json.dumps(data)
@@ -67,6 +67,10 @@ data= json.dumps(data)
 ################### ENVIO POST ######################
 response = requests.post(URL, data= data, headers= HEADERS)
 content=print(response.content)
+
+###############################DB ########################3
+diccionario =json.loads(response.content)
+settings.DB.crearSuscripcion(diccionario)
 
 
 

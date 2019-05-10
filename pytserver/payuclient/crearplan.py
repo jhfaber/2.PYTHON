@@ -32,13 +32,13 @@ URL_CONSULTA = '/rest/v4.9/plans/{planCode}'
 URL_CREAR_PLAN = URL_API_PRODUCCION+URL_CREACION
 # print(URL_CREAR_PLAN)
 
-ID_CODE= "5"
+ID_CODE= "20711"
 
 ##############BUILD POST BODY#################
 data = {
                 "accountId": ACCOUNDTID,
                 "planCode": ID_CODE,
-                "description": "nnmm",
+                "description": "PLAN DIARIO 10 mil pesos",
                 "interval": "MONTH",
                 "intervalCount": "1",
                 "maxPaymentsAllowed": "12",
@@ -98,3 +98,15 @@ content=print(response.content)
 ########################## IMPRIMIR LO QUE ENVIO Y RECIBO###############
 # res=dump.dump_all(response)
 # print(res.decode('utf-8'))
+
+########################## IMPRIMIR LO QUE ENVIO Y RECIBO###############
+
+
+#Valores devueltos en dict
+diccionario =json.loads(response.content)
+
+
+settings.DB.crearPlan(diccionario, ID_CODE)
+
+
+

@@ -28,7 +28,6 @@ HEADERS =settings.HEADER
 
 URL_CREACION= 'rest/v4.9/customers/'
 URL_CONSULTA= 'rest/v4.9/customers/{}'
-ID='1'
 
 URL = URL_API_PRODUCCION+URL_CREACION
 
@@ -39,12 +38,6 @@ data = {
                 
         }
 
-
-
-# print(json.dumps(data, indent=4))
-############################# BUILD POST HEADERS ############################
-
-
 data= json.dumps(data)
 
 
@@ -52,8 +45,11 @@ data= json.dumps(data)
 response = requests.post(URL, data= data, headers= HEADERS)
 content=print(response.content)
 
-########################## IMPRIMIR LO QUE ENVIO Y RECIBO###############
-# res=dump.dump_all(response)
-# print(res.decode('utf-8'))
+###################### BD ############
+
+
+diccionario =json.loads(response.content)
+
+settings.DB.crearCliente(diccionario)
 
 

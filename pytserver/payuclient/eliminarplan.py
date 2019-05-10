@@ -17,7 +17,6 @@ print("Content-Type: text/json\n")
 
 import requests
 import json, settings
-# from requests_toolbelt.utils import dump
 
 
 URL_API_PRODUCCION = settings.URL
@@ -25,20 +24,22 @@ ENCODED= settings.ENCODED
 API_LOGIN = settings.API_LOGIN
 API_KEY= settings.API_KEY
 HOST= settings.HOST
+ACCOUNDTID =settings.ACCOUNDTID
 HEADERS =settings.HEADER
 
-URL_CONSULTA= '/rest/v4.9/plans/{}' #{clienteID}
-ID='20789'
-URL = URL_API_PRODUCCION+(URL_CONSULTA.format(ID))
+
+#OBLIGATORIO
+ID= '20711'
+URL_ELIMINAR= 'rest/v4.9/plans/{}'
+
+#URL
+URL = URL_API_PRODUCCION+(URL_ELIMINAR.format(ID))
 
 
+################### ENVIO ######################
 
-
-
-
-response = requests.get(URL,headers=HEADERS)
-# data=dump.dump_all(response)
-# print(data.decode('utf-8'))
-
+response = requests.delete(URL, headers= HEADERS)
 content=print(response.content)
 
+#BD
+settings.DB.eliminarPlan(ID)

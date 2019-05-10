@@ -13,11 +13,10 @@ print("HTTP/1.1 200 OK")
 print("Access-Control-Allow-Origin: *")
 print("Content-Type: text/json\n")
 
-print("hi world")
 
 import requests
 import json, settings
-from requests_toolbelt.utils import dump
+# from requests_toolbelt.utils import dump
 
 URL_API_PRODUCCION = settings.URL
 ENCODED= settings.ENCODED
@@ -29,9 +28,10 @@ HEADERS =settings.HEADER
 
 URL_CREACION= 'rest/v4.9/customers/{}/creditCards' #{clienteID}
 URL_CONSULTA= 'rest/v4.9/creditCards/{}' #{creditCard}
-ID_CLIENTE='284aa042ejtn'
-TOKEN = '09ab5af6-00f7-47c1-bdad-c6d124862e49'
-T_NUMERO='4323592726185547'
+
+#OBLIGATORIOS
+ID_CLIENTE='7b5951r6hwk3'
+
 URL = URL_API_PRODUCCION+(URL_CREACION.format(ID_CLIENTE))
 
 
@@ -59,7 +59,7 @@ address= {
         }
 data['address']=address
 
-print(json.dumps(data, indent=4))
+# print(json.dumps(data, indent=4))
 ############################# BUILD POST HEADERS ############################
 
 
@@ -69,6 +69,15 @@ data= json.dumps(data)
 ################### ENVIO POST ######################
 response = requests.post(URL, data= data, headers= HEADERS)
 content=print(response.content)
+
+
+
+
+
+###############################DB ########################3
+diccionario =json.loads(response.content)
+
+settings.DB.crearTarjeta(diccionario)
 
 
 

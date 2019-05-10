@@ -36,9 +36,12 @@ HEADER = {
 ######################### DB #####################################
 
 DB = sqlDao.sqlDao()
-# DB.createTable()
-# DB.insertData()
-# DB.selectData()
-# DB.insertData()
-# DB.closeConnection()
+
+
+if __name__ == "__main__":
+    DB.createTables()    
+    # DB.insertData()
+    DB.selectData()
+    # DB.insertData()
+    # DB.closeConnection()
 
