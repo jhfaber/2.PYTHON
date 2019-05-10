@@ -32,7 +32,7 @@ URL_CONSULTA = '/rest/v4.9/plans/{planCode}'
 URL_CREAR_PLAN = URL_API_PRODUCCION+URL_CREACION
 # print(URL_CREAR_PLAN)
 
-ID_CODE= "4"
+ID_CODE= "5"
 
 ##############BUILD POST BODY#################
 data = {

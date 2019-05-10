@@ -24,6 +24,7 @@ ENCODED= settings.ENCODED
 API_LOGIN = settings.API_LOGIN
 API_KEY= settings.API_KEY
 HOST= settings.HOST
+HEADERS =settings.HEADER
 
 URL_CREACION= 'rest/v4.9/customers/'
 URL_CONSULTA= 'rest/v4.9/customers/{}'
@@ -44,20 +45,11 @@ data = {
 ############################# BUILD POST HEADERS ############################
 
 
-headers = { 
-        "Host": "api.payulatam.com",
-        "Content-Type": "application/json; charset=utf-8",
-        "Accept": "application/json",
-        "Accept-language": "es",
-        "Content-Length": "length",
-        "Authorization": "Basic "+ENCODED,
-}
-
 data= json.dumps(data)
 
 
 ################### ENVIO POST ######################
-response = requests.post(URL, data= data, headers= headers)
+response = requests.post(URL, data= data, headers= HEADERS)
 content=print(response.content)
 
 ########################## IMPRIMIR LO QUE ENVIO Y RECIBO###############

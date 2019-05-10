@@ -17,7 +17,7 @@ print("Content-Type: text/json\n")
 
 import requests
 import json, settings
-from requests_toolbelt.utils import dump
+# from requests_toolbelt.utils import dump
 
 
 URL_API_PRODUCCION = settings.URL
@@ -28,7 +28,7 @@ HOST= settings.HOST
 HEADERS =settings.HEADER
 
 URL_CONSULTA= '/rest/v4.9/plans/{}' #{clienteID}
-ID='1'
+ID='5'
 URL = URL_API_PRODUCCION+(URL_CONSULTA.format(ID))
 
 
@@ -41,3 +41,32 @@ response = requests.get(URL,headers=HEADERS)
 # print(data.decode('utf-8'))
 
 content=print(response.content)
+####################### DB ###########################
+
+
+storage =json.loads(response.content)
+# print(storage['id'])
+
+
+
+            
+string= '''INSERT INTO plan VALUES (
+            \''''+str(storage['id'])+'''\',
+            \''''+str(storage['planCode'])+'''\',
+            \''''+str(storage['description'])+'''\',
+            \''''+str(storage['accountId'])+'''\',
+            \''''+str(storage['intervalCount'])+'''\',
+            \''''+str(storage['interval'])+'''\',
+            \''''+str(storage['maxPaymentsAllowed'])+'''\',
+            \''''+str(storage['maxPaymentAttempts'])+'''\',
+            \''''+str(storage['paymentAttemptsDelay'])+'''\',
+            \''''+str(storage['maxPendingPayments'])+'''\',
+            \''''+str(storage['trialDays'])+'''\'
+            )
+            '''
+
+# print(string)
+settings.DB.db.execute(string)
+settings.DB.commit()
+# settings.DB.selectData()
+settings.DB.closeConnection()

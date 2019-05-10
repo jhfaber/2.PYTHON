@@ -8,6 +8,7 @@
 
  """
 
+
 import json, os, sqlDao, base64
 
 CONF = '\\config.json'
@@ -34,6 +35,10 @@ HEADER = {
 
 ######################### DB #####################################
 
-db = sqlDao.sqlDao()
-db.selectData()
+DB = sqlDao.sqlDao()
+# DB.createTable()
+# DB.insertData()
+# DB.selectData()
+# DB.insertData()
+# DB.closeConnection()
 

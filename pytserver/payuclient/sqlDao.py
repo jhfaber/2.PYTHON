@@ -1,33 +1,81 @@
 import sqlite3
 
 class sqlDao:
-    def __init__(self, db):
-        self.db= db
-        self.conn = sqlite3.connect('example.db')
+    def __init__(self):
+        
+        conn = sqlite3.connect('clientpayu.db')
+        self.conn = conn
         self.db = conn.cursor()
 
 
     # Create table
-    def createTable(self):
-        self.db.execute('''CREATE TABLE plan
-                (date text, trans text, symbol text, qty real, price real)''')
+    def createTables(self):
+                  
+        self.db.execute(
+            '''
+            CREATE TABLE plan (
+                id,               
+                            )
+
+            '''           
+             )
+        self.db.execute(
+            '''
+            CREATE TABLE plan_additionalvalues (
+                name,
+                value,
+                currency
+                            )
+
+            '''           
+            )
+        # self.db.execute(
+        #     '''
+        #     CREATE TABLE plan_additionalvalues (
+        #         name,
+        #         value,
+        #         currency
+        #                     )
+
+        #     '''           
+        # )
+        self.conn.commit()
+
+
 
     # Insert a row of data
     def insertData(self):
-        self.db.execute("INSERT INTO stocks VALUES ('2006-01-05','BUY','RHAT',100,35.14)")
+        self.db.execute('''INSERT INTO plan VALUES (
+            'a5858dbc-fd22-4d7c-87ad-a6627b2b1b5a3',
+            '1',
+            'nnmm',
+            '805394',
+            '1',
+            'MONTH',
+            '12',
+            '0',
+            '1',
+            '0',
+            '0'
+            )
+            '''
+        
+        )
+        self.conn.commit()
 
     def selectData(self):
-        self.db.execute("SELECT * FROM stocks WHERE symbol = '%s'" % symbol)
-        print(self.c.fetchone())
+        # symbol = 'RHAT'
+        self.db.execute("SELECT * FROM plan")
+        while True:
+            row = self.db.fetchone()
+            if row == None:
+                break
+            print(row)   
     
-    def main(self):
-        # c=createConnection()
-        symbol = 'RHAT'
-        
-        c.execute("SELECT * FROM stocks WHERE symbol = '%s'" % symbol)
-        print(c.fetchone())
     
-    def closeConnection(self):        
-        conn.commit()
-        conn.close()
+    def closeConnection(self):       
+        self.conn.close()
+    
+    def commit(self):
+        self.conn.commit()
 
