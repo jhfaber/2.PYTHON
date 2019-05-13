@@ -29,12 +29,11 @@ HEADERS =settings.HEADER
 
 
 #OBLIGATORIO
-ID= '7b5951r6hwk3'
+ID= '73de7dfc611y'
 URL_ELIMINAR= 'rest/v4.9/customers/{}'
 
 #URL
 URL = URL_API_PRODUCCION+(URL_ELIMINAR.format(ID))
-print(URL)
 
 ################### ENVIO ######################
 

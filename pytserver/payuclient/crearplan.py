@@ -32,7 +32,7 @@ URL_CONSULTA = '/rest/v4.9/plans/{planCode}'
 URL_CREAR_PLAN = URL_API_PRODUCCION+URL_CREACION
 # print(URL_CREAR_PLAN)
 
-ID_CODE= "20711"
+ID_CODE= "8"
 
 ##############BUILD POST BODY#################
 data = {
@@ -42,24 +42,7 @@ data = {
                 "interval": "MONTH",
                 "intervalCount": "1",
                 "maxPaymentsAllowed": "12",
-                "paymentAttemptsDelay": "1",
-                # [
-                #         {
-                #                 "name": "PLAN_VALUE",
-                #                 "value": "20000",
-                #                 "currency": "COP"
-                #         },
-                #         {
-                #                 "name": "PLAN_TAX",
-                #                 "value": "3193",
-                #                 "currency": "COP"
-                #         },
-                #         {
-                #                 "name": "PLAN_TAX_RETURN_BASE",
-                #                 "value": "16806",
-                #                 "currency": "COP"
-                #         }
-                # ]
+                "paymentAttemptsDelay": "1"
                 
         }
 

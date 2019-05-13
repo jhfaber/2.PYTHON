@@ -197,7 +197,7 @@ class sqlDao:
         estado='inactivo'
         string= '''UPDATE plan
                    SET estado=\''''+estado+'''\'
-                   WHERE  id=\''''+id+'''\';'''
+                   WHERE  planCode=\''''+id+'''\';'''
 
         # print(string)
         self.db.execute(string)

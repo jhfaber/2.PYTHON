@@ -30,7 +30,7 @@ URL_CREACION= 'rest/v4.9/customers/{}/creditCards' #{clienteID}
 URL_CONSULTA= 'rest/v4.9/creditCards/{}' #{creditCard}
 
 #OBLIGATORIOS
-ID_CLIENTE='7b5951r6hwk3'
+ID_CLIENTE='73de7dfc611y'
 
 URL = URL_API_PRODUCCION+(URL_CREACION.format(ID_CLIENTE))
 

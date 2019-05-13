@@ -29,7 +29,7 @@ HOST= settings.HOST
 
 URL_CREACION= 'rest/v4.9/customers/'
 URL_CONSULTA= 'rest/v4.9/customers/{}' #{clienteID}
-ID='284aa042ejtn'
+ID='73de7dfc611y'
 URL = URL_API_PRODUCCION+(URL_CONSULTA.format(ID))
 HEADERS =settings.HEADER
 
