@@ -1,4 +1,4 @@
-import sqlite3, os
+import sqlite3, os, json
 
 class sqlDao:
     def __init__(self):
@@ -41,6 +41,7 @@ class sqlDao:
             '''
             CREATE TABLE IF NOT EXISTS tarjeta (
                 token,
+                id_cliente,
                 estado
                             )
 
@@ -51,6 +52,9 @@ class sqlDao:
             '''
             CREATE TABLE IF NOT EXISTS suscripcion (
                 id,
+                id_plan,
+                id_cliente,
+                id_token_cliente,
                 estado                
                             )
 
@@ -139,10 +143,11 @@ class sqlDao:
         self.commit()
         self.closeConnection()
 
-    def crearTarjeta(self, diccionario):
+    def crearTarjeta(self, diccionario, id):
         estado='activo'
         string= '''INSERT INTO tarjeta VALUES (            
             \''''+str(diccionario['token'])+'''\',
+            \''''+id+'''\',
             \''''+estado+'''\'        
             
             )'''
@@ -153,12 +158,17 @@ class sqlDao:
         estado='activo'
         string= '''INSERT INTO suscripcion VALUES (            
             \''''+str(diccionario['id'])+'''\',
+            \''''+str(diccionario['plan']['planCode'])+'''\',
+            \''''+str(diccionario['customer']['id'])+'''\',
+            \''''+str(diccionario['customer']['creditCards'][0]['token'])+'''\',
             \''''+estado+'''\'       
             
             )'''
         self.db.execute(string)
         self.commit()
         self.closeConnection()
+        # print('string: '+string)
+        # print('suscripcion: '+json.dumps(diccionario))
 
     def eliminarSuscripcion(self,id):
         estado='inactivo'

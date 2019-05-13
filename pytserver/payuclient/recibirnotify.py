@@ -14,6 +14,7 @@ else:
 
 
 values=data["additionalValues"][0]
+values[]
 print(json.dumps(values))
 
 

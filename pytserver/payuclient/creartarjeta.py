@@ -30,9 +30,9 @@ URL_CREACION= 'rest/v4.9/customers/{}/creditCards' #{clienteID}
 URL_CONSULTA= 'rest/v4.9/creditCards/{}' #{creditCard}
 
 #OBLIGATORIOS
-ID_CLIENTE='73de7dfc611y'
+ID='fdaccycyj8x2'
 
-URL = URL_API_PRODUCCION+(URL_CREACION.format(ID_CLIENTE))
+URL = URL_API_PRODUCCION+(URL_CREACION.format(ID))
 
 
 ##############BUILD BODY#################
@@ -77,7 +77,7 @@ content=print(response.content)
 ###############################DB ########################3
 diccionario =json.loads(response.content)
 
-settings.DB.crearTarjeta(diccionario)
+settings.DB.crearTarjeta(diccionario, ID)
 
 
 
