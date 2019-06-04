@@ -17,7 +17,7 @@ print("Content-Type: text/json\n")
 
 import requests
 import json, settings
-from requests_toolbelt.utils import dump
+
 
 URL_API_PRODUCCION = settings.URL
 ENCODED= settings.ENCODED
@@ -32,17 +32,20 @@ URL_CONSULTA = '/rest/v4.9/plans/{planCode}'
 URL_CREAR_PLAN = URL_API_PRODUCCION+URL_CREACION
 # print(URL_CREAR_PLAN)
 
-ID_CODE= "888"
-
+ID_CODE= "30"
+#DAY,MONTH
 ##############BUILD POST BODY#################
+#paymentAttemptsDelay Días que espera para volver a intentar el pago
+
 data = {
                 "accountId": ACCOUNDTID,
                 "planCode": ID_CODE,
-                "description": "PLAN DIARIO 10 mil pesos",
+                "description": "PLAN MENSUAL 10 mil pesos",
                 "interval": "MONTH",
                 "intervalCount": "1",
                 "maxPaymentsAllowed": "12",
-                "paymentAttemptsDelay": "1"
+                "paymentAttemptsDelay": "1",
+                "trialDays" : "0"
                 
         }
 
@@ -89,7 +92,7 @@ content=print(response.content)
 diccionario =json.loads(response.content)
 
 
-settings.DB.crearPlan(diccionario, ID_CODE)
+
 
 
 

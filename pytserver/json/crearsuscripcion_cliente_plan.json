@@ -1,0 +1,31 @@
+{
+    "quantity": "1",
+    "installments": "1",
+    "trialDays": "10",
+    "customer": {
+       "id": "eab38z33hh2",
+       "creditCards": [
+          {
+             "name": "Sample User Name",
+             "document": "101010123",
+             "number": "4242424242424242",
+             "expMonth": "01",
+             "expYear": "2018",
+             "type": "VISA",
+             "address": {
+                "line1": "Address Name",
+                "line2": "17 25",
+                "line3": "Of 301",
+                "postalCode": "00000",
+                "city": "City Name",
+                "state": "State Name",
+                "country": "CO",
+                "phone": "300300300"
+             }
+          }
+       ]
+    },
+    "plan": {
+       "planCode": "sample-plan-code-001"
+    }
+ }

@@ -77,7 +77,7 @@ class sqlDao:
         self.conn.commit()
 
     def selectData(self):
-        # symbol = 'RHAT'
+        
         print("**************************************PLANES****************************")
         self.db.execute("SELECT * FROM plan")
         while True:
@@ -85,7 +85,7 @@ class sqlDao:
             if row == None:
                 break
             print(row) 
-        # symbol = 'RHAT'
+        
         print("**************************************CLIENTES****************************")
         self.db.execute("SELECT * FROM cliente")
         while True:
@@ -127,7 +127,7 @@ class sqlDao:
             \''''+estado+'''\'
             )'''
         
-        # print(string)
+        
         self.db.execute(string)
         self.commit()
         self.closeConnection()
@@ -167,8 +167,7 @@ class sqlDao:
         self.db.execute(string)
         self.commit()
         self.closeConnection()
-        # print('string: '+string)
-        # print('suscripcion: '+json.dumps(diccionario))
+        
 
     def eliminarSuscripcion(self,id):
         estado='inactivo'
@@ -176,7 +175,7 @@ class sqlDao:
                    SET estado=\''''+estado+'''\'
                    WHERE  id=\''''+id+'''\''''
 
-        # print(string)
+        
         self.db.execute(string)
         self.commit()
         self.closeConnection()
@@ -187,7 +186,7 @@ class sqlDao:
                    SET estado=\''''+estado+'''\'
                    WHERE  token=\''''+id+'''\';'''
 
-        # print(string)
+        
         self.db.execute(string)
         self.commit()
         self.closeConnection()
@@ -198,7 +197,7 @@ class sqlDao:
                    SET estado=\''''+estado+'''\'
                    WHERE  id=\''''+id+'''\';'''
 
-        # print(string)
+        
         self.db.execute(string)
         self.commit()
         self.closeConnection()
@@ -209,7 +208,7 @@ class sqlDao:
                    SET estado=\''''+estado+'''\'
                    WHERE  planCode=\''''+id+'''\';'''
 
-        # print(string)
+        
         self.db.execute(string)
         self.commit()
         self.closeConnection()

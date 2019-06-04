@@ -24,23 +24,20 @@ ENCODED= settings.ENCODED
 API_LOGIN = settings.API_LOGIN
 API_KEY= settings.API_KEY
 HOST= settings.HOST
+ACCOUNDTID =settings.ACCOUNDTID
 HEADERS =settings.HEADER
 
 
-TOKEN = '09ab5af6-00f7-47c1-bdad-c6d124862e49'
-T_NUMERO='4323592726185547'
-PLAN_CODE = "1"
-ID_SUSCRIPCION= 'e83de8ep5wzm'
-ID_SUSCRIPCION2 ='f1cbe6dvmmg2'
-URL_CONSULTA ='/rest/v4.9/recurringBill'
-URL = URL_API_PRODUCCION+URL_CONSULTA
+#OBLIGATORIO
+ID= '5d252sb65r9a'
+URL_ELIMINAR= 'rest/v4.9/customers/{}'
 
-############################# BUILD POST HEADERS ############################
+#URL
+URL = URL_API_PRODUCCION+(URL_ELIMINAR.format(ID))
+print(URL)
+################### ENVIO ######################
 
-
-################### ENVIO POST ######################
-response = requests.get(URL, headers= HEADERS)
+response = requests.delete(URL, headers= HEADERS)
 content=print(response.content)
 
-
-
+#BD

@@ -9,7 +9,8 @@
  """
 
 
-import json, os, sqlDao, base64
+import json, os,  base64
+from requests_toolbelt.utils import dump 
 
 CONF = '\\config.json'
 cwd = os.path.dirname(os.path.realpath(__file__)) + CONF
@@ -26,22 +27,27 @@ HEADER = {
         "Host": HOST,
         "Content-Type": "application/json; charset=utf-8",
         "Accept": "application/json",
-        "Accept-language": "es",
-        "Content-Length": "length",
-        "Authorization": "Basic "+ENCODED,
+        "Accept-language": "es",        
+        "Authorization": "Basic "+ENCODED
+
 }
 
 # print(ENCODED+URL+HOST+ACCOUNDTID+API_KEY+API_LOGIN)
+####################### FUNCTIONS ##############
+
+def beauty_print(response):  
+     
+    prepared = dump.dump_all(response)
+    print(prepared.decode('utf-8'))
 
 ######################### DB #####################################
 
-DB = sqlDao.sqlDao()
 
 
 if __name__ == "__main__":
-    DB.createTables()    
+    print('main')   
     # DB.insertData()
-    DB.selectData()
+    # DB.selectData()
     # DB.insertData()
     # DB.closeConnection()
 

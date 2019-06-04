@@ -14,9 +14,10 @@ print("Access-Control-Allow-Origin: *")
 print("Content-Type: text/json\n")
 
 
+
 import requests
 import json, settings
-# from requests_toolbelt.utils import dump
+
 
 URL_API_PRODUCCION = settings.URL
 ENCODED= settings.ENCODED
@@ -26,42 +27,39 @@ HOST= settings.HOST
 ACCOUNDTID =settings.ACCOUNDTID
 HEADERS =settings.HEADER
 
-URL_CREACION= 'rest/v4.9/customers/{}/creditCards' #{clienteID}
-URL_CONSULTA= 'rest/v4.9/creditCards/{}' #{creditCard}
+URL_CREACION= 'rest/v4.9/subscriptions/' 
+URL_CONSULTA= 'rest/v4.9/subscriptions/{}' #{susbcripcionID}
 
 #OBLIGATORIOS
-ID='fdaccycyj8x2'
+ID_CLIENTE='76c5ffqje9q8'
+TOKEN = '603eaxnp5fua'
+PLAN_CODE = "30"
 
-URL = URL_API_PRODUCCION+(URL_CREACION.format(ID))
+#URL
+URL = URL_API_PRODUCCION+URL_CREACION
 
-
-##############BUILD BODY#################
+##############BUILD BODY# ################
 data = {
-            "name": "TEST E-DENTALSYS",
-            "document": "1020304050",
-            "number": "4323592726185547",
-            "expMonth": "03",
-            "expYear": "2020",
-            "type": "VISA",                           
+            "quantity": "1",
+            "installments": "1",
+            "trialDays": "0",   
+            'immediatePayment': "true"                              
                 
         }
+customer = {
+    "id": ID_CLIENTE,
+}
+creditCards = [{
+    "token": TOKEN,
+}]
+customer['creditCards'] = creditCards
+plan= {
+    "planCode": PLAN_CODE
+}
+data['customer'] =customer
+data['plan']= plan
 
-address={}
-address= {
-            "line1": "Address Name",
-            "line2": "17 25",
-            "line3": "Of 301",
-            "postalCode": "00000",
-            "city": "City Name",
-            "state": "State Name",
-            "country": "CO",
-            "phone": "300300300"
-        }
-data['address']=address
-
-# print(json.dumps(data, indent=4))
 ############################# BUILD POST HEADERS ############################
-
 
 data= json.dumps(data)
 
@@ -70,14 +68,11 @@ data= json.dumps(data)
 response = requests.post(URL, data= data, headers= HEADERS)
 content=print(response.content)
 
-
-
-
-
 ###############################DB ########################3
 diccionario =json.loads(response.content)
 
-settings.DB.crearTarjeta(diccionario, ID)
+
+settings.beauty_print(response)
 
 
 

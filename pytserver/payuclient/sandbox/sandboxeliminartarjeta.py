@@ -29,11 +29,13 @@ HEADERS =settings.HEADER
 
 
 #OBLIGATORIO
-ID= '73de7dfc611y'
-URL_ELIMINAR= 'rest/v4.9/customers/{}'
+ID= 'e7581ufpea7i'
+TOKEN='daa6c369-a696-40b8-b5ef-f0883fcddb71'
+URL_ELIMINAR= 'rest/v4.9/customers/{}/creditCards/{}'
 
 #URL
-URL = URL_API_PRODUCCION+(URL_ELIMINAR.format(ID))
+URL = URL_API_PRODUCCION+(URL_ELIMINAR.format(ID,TOKEN))
+print(URL)
 
 ################### ENVIO ######################
 
@@ -41,4 +43,9 @@ response = requests.delete(URL, headers= HEADERS)
 content=print(response.content)
 
 #BD
-settings.DB.eliminarCliente(ID)
+settings.DB.eliminarTarjeta(TOKEN)
+
+
+
+
+

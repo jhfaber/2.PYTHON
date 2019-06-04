@@ -18,26 +18,27 @@ print("Content-Type: text/json\n")
 import requests
 import json, settings
 
+
 URL_API_PRODUCCION = settings.URL
 ENCODED= settings.ENCODED
 API_LOGIN = settings.API_LOGIN
 API_KEY= settings.API_KEY
 HOST= settings.HOST
+ACCOUNDTID =settings.ACCOUNDTID
 HEADERS =settings.HEADER
 
-URL_CREACION= 'rest/v4.9/subscriptions/' 
-URL_CONSULTA= 'rest/v4.9/subscriptions/{}' #{susbcripcionID}
-ID_CLIENTE='284aa042ejtn'
-TOKEN = '81864378-fdcd-4f40-a431-e54bb50145a0'
-T_NUMERO='4323592726185547'
-PLAN_CODE = "1"
-ID_SUSCRIPCION= 'e78cbj3spq3f'
-URL = URL_API_PRODUCCION+(URL_CREACION.format(ID_SUSCRIPCION))
 
+#OBLIGATORIO
+ID= '1'
+URL_ELIMINAR= 'rest/v4.9/plans/{}'
 
-################### ENVIO POST ######################
-response = requests.get(URL, headers= HEADERS)
+#URL
+URL = URL_API_PRODUCCION+(URL_ELIMINAR.format(ID))
+print(URL)
+
+################### ENVIO ######################
+
+response = requests.delete(URL, headers= HEADERS)
 content=print(response.content)
 
-
-
+#BD

@@ -14,10 +14,8 @@ print("Access-Control-Allow-Origin: *")
 print("Content-Type: text/json\n")
 
 
-
 import requests
 import json, settings
-
 
 URL_API_PRODUCCION = settings.URL
 ENCODED= settings.ENCODED
@@ -27,50 +25,61 @@ HOST= settings.HOST
 ACCOUNDTID =settings.ACCOUNDTID
 HEADERS =settings.HEADER
 
-URL_CREACION= 'rest/v4.9/subscriptions/' 
-URL_CONSULTA= 'rest/v4.9/subscriptions/{}' #{susbcripcionID}
+URL_CREACION= 'rest/v4.9/customers/{}/creditCards' #{clienteID}
+URL_CONSULTA= 'rest/v4.9/creditCards/{}' #{creditCard}
 
 #OBLIGATORIOS
-ID_CLIENTE='fdaccycyj8x2'
-TOKEN = '748a8731-e39f-4671-8920-16318c1c3158'
-PLAN_CODE = "888"
+ID='1330dyfo99gm'
 
-#URL
-URL = URL_API_PRODUCCION+URL_CREACION
+URL = URL_API_PRODUCCION+(URL_CREACION.format(ID))
 
+# 9d9a9ad5-84d5-4606-a13d-0d377d63bc22 approved
 ##############BUILD BODY#################
 data = {
-            "quantity": "1",
-            "installments": "1",
-            "trialDays": "1",   
-            #'immediatePayment': "true"                              
+            "name": "APPROVED",
+            "document": "1020304050",
+            "number": "546457474",
+            "expMonth": "03",
+            "expYear": "2020",
+            "type": "VISA"
+            
+            
+                                     
                 
         }
-customer = {
-    "id": ID_CLIENTE,
-}
-creditCards = [{
-    "token": TOKEN,
-}]
-customer['creditCards'] = creditCards
-plan= {
-    "planCode": PLAN_CODE
-}
-data['customer'] =customer
-data['plan']= plan
 
+address={}
+address= {
+            "line1": "Address Name",
+            "line2": "17 25",
+            "line3": "Of 301",
+            "postalCode": "00000",
+            "city": "City Name",
+            "state": "State Name",
+            "country": "CO",
+            "phone": "300300300"
+        }
+data['address']=address
+
+# print(json.dumps(data, indent=4))
 ############################# BUILD POST HEADERS ############################
+
 
 data= json.dumps(data)
 
 
 ################### ENVIO POST ######################
 response = requests.post(URL, data= data, headers= HEADERS)
-content=print(response.content)
+content=print(response.content.decode('utf-8'))
+
+
+
+
 
 ###############################DB ########################3
 diccionario =json.loads(response.content)
-settings.DB.crearSuscripcion(diccionario)
+
+# settings.DB.crearTarjeta(diccionario, ID)
 
 
 

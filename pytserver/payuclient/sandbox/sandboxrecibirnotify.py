@@ -13,14 +13,11 @@ else:
     data = json.loads(post_string)
 
 
-values=data["additionalValues"][0]
-values[]
-print(json.dumps(values))
+# values=data["additionalValues"][0]
+
+print(json.dumps(data))
 
 
-
-# length = os.environ["CONTENT_LENGTH"] 
-# print(type(sys.stdin.read(int(length))))
 
 
 

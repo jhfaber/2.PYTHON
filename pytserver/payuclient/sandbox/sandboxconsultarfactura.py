@@ -17,8 +17,7 @@ print("Content-Type: text/json\n")
 
 import requests
 import json, settings
-import base64
-from requests_toolbelt.utils import dump
+
 
 URL_API_PRODUCCION = settings.URL
 ENCODED= settings.ENCODED
@@ -27,24 +26,41 @@ API_KEY= settings.API_KEY
 HOST= settings.HOST
 HEADERS =settings.HEADER
 
-URL_CREACION= 'rest/v4.9/customers/{}/creditCards' #{clienteID}
-URL_CONSULTA= 'rest/v4.9/creditCards/{}' #{creditCard}
-ID_CLIENTE='284aa042ejtn'
-TOKEN = '09ab5af6-00f7-47c1-bdad-c6d124862e49'
-T_NUMERO='4323592726185547'
-URL = URL_API_PRODUCCION+(URL_CONSULTA.format(TOKEN))
 
+# TOKEN = '09ab5af6-00f7-47c1-bdad-c6d124862e49'
+# T_NUMERO='4323592726185547'
+# PLAN_CODE = "1"
+serial_pago_suscripcion= 'cd508mgib217'
+serial_pago_cliente = '92abaol8td8a'
 
+URL_CONSULTA ='rest/v4.9/recurringBill'
+URL = URL_API_PRODUCCION+URL_CONSULTA
 
+""" 
+    subscriptionId = subscriptionId
+ """
+# /rest/v4.9/recurringBill?subscriptionId={subscriptionId}
 ############################# BUILD POST HEADERS ############################
+params ={
+    "subscriptionId" : serial_pago_suscripcion
+}
 
-
-# data= json.dumps(data)
+# params ={
+#     "customerId" : serial_pago_cliente
+# }
 
 
 ################### ENVIO POST ######################
-response = requests.get(URL, headers= HEADERS)
-content=print(response.content)
+
+def main():
+    response = requests.get(URL, headers= HEADERS, params= params)
+    settings.beauty_print(response)
+    # content=print(response.content)
+
+
+main()
+
+
 
 
 

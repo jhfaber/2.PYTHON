@@ -17,39 +17,37 @@ print("Content-Type: text/json\n")
 
 import requests
 import json, settings
-from requests_toolbelt.utils import dump
+
 
 URL_API_PRODUCCION = settings.URL
 ENCODED= settings.ENCODED
 API_LOGIN = settings.API_LOGIN
 API_KEY= settings.API_KEY
 HOST= settings.HOST
+ACCOUNDTID =settings.ACCOUNDTID
 HEADERS =settings.HEADER
 
-URL_CREACION= 'rest/v4.9/customers/'
-URL_CONSULTA= 'rest/v4.9/customers/{}'
 
-URL = URL_API_PRODUCCION+URL_CREACION
+#OBLIGATORIO
+ID= '1c41at07epzm' 
+URL_ELIMINAR= 'rest/v4.9/subscriptions/{}'
+#URL
+URL = URL_API_PRODUCCION+(URL_ELIMINAR.format(ID))
+# URL = URL_API_PRODUCCION+URL_ELIMINAR
 
-##############BUILD POST BODY#################
-data = {
-            "fullName": "John",
-            "email": "jmarin@e-dentalsys.com"                             
-                
-        }
-
-data= json.dumps(data)
-
-
-################### ENVIO POST ######################
-response = requests.post(URL, data= data, headers= HEADERS)
+print(URL)
+################### ENVIO ######################
+response = requests.delete(URL, headers= HEADERS)
 content=print(response.content)
 
-###################### BD ############
+###############################DB ########################3
+# diccionario =json.loads(response.content)
+# settings.DB.eliminarSuscripcion(ID)
 
 
-diccionario =json.loads(response.content)
+settings.beauty_print(response)
 
-settings.DB.crearCliente(diccionario)
+
+
 
 

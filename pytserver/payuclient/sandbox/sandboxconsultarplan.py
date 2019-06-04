@@ -17,7 +17,6 @@ print("Content-Type: text/json\n")
 
 import requests
 import json, settings
-# from requests_toolbelt.utils import dump
 
 
 URL_API_PRODUCCION = settings.URL
@@ -28,7 +27,7 @@ HOST= settings.HOST
 HEADERS =settings.HEADER
 
 URL_CONSULTA= '/rest/v4.9/plans/{}' #{clienteID}
-ID='2'
+ID='30'
 URL = URL_API_PRODUCCION+(URL_CONSULTA.format(ID))
 
 

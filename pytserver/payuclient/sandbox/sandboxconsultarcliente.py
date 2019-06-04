@@ -17,7 +17,6 @@ print("Content-Type: text/json\n")
 
 import requests
 import json
-from requests_toolbelt.utils import dump
 import settings
 
 
@@ -29,7 +28,7 @@ HOST= settings.HOST
 
 URL_CREACION= 'rest/v4.9/customers/'
 URL_CONSULTA= 'rest/v4.9/customers/{}' #{clienteID}
-ID='73de7dfc611y'
+ID='92abaol8td8a'
 URL = URL_API_PRODUCCION+(URL_CONSULTA.format(ID))
 HEADERS =settings.HEADER
 
@@ -52,17 +51,5 @@ content=print(response.content)
 # print(res.decode('utf-8'))
 
 
-
-
-############################### DB ###########################
-""" storage =json.loads(response.content)
-string= '''INSERT INTO cliente VALUES (
-            \''''+str(storage['id'])+'''\'
-            )'''
-
-# print(string)
-settings.DB.db.execute(string)
-settings.DB.commit()
-settings.DB.closeConnection() """
 
 
