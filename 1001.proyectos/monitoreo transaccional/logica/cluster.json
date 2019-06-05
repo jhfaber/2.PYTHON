@@ -1,0 +1,278 @@
+[
+{
+    "nombre":"Cliente",
+    "consulta":"""
+declare @diferencia int
+set @diferencia=datediff(MM,'@fecha_ini@','@fecha_fin@')
+
+select vc.CLIEN_idInterno as id_cliente,
+    vc.CLIEN_ActividadEconomicacliente as actividad,
+
+    ISNULL(vc.CLIEN_MontoIngresoMensual,0) +ISNULL(vc.CLIEN_MontoOtrosIngresosMensual,0) as monto_ingreso,
+    ISNULL(vc.CLIEN_MontoEgresoMensual,0) as monto_egreso,
+    ISNULL(vc.CLIEN_TotalPatrimonio,0) as total_patrimonio,
+(select ISNULL(sum(tr.trans_montoMonedaOriginal),0)
+ from VA_TRANSACCION tr
+ inner join VA_CLIENTExPRODUCTO cp2 on tr.TRANS_CLIENTExPRODUCTO=cp2.CLXPR_IdInterno
+  where tr.TRANS_Entidad=@identidad@ and
+ cp2.CLXPR_Cliente=vc.CLIEN_idInterno and tr.TRANS_TipoTransaccion=2
+ and tr.TRANS_FechaRealizada>'@fecha_ini@'
+ and tr.TRANS_FechaRealizada<'@fecha_fin@'
+
+  )/@diferencia as total_debito,
+(select ISNULL(sum(tr.trans_montoMonedaOriginal),0)
+ from VA_TRANSACCION tr
+ inner join VA_CLIENTExPRODUCTO cp2 on tr.TRANS_CLIENTExPRODUCTO=cp2.CLXPR_IdInterno
+  where tr.TRANS_Entidad=@identidad@ and
+ cp2.CLXPR_Cliente=vc.CLIEN_idInterno and tr.TRANS_TipoTransaccion=1
+ and tr.TRANS_FechaRealizada>'@fecha_ini@'
+ and tr.TRANS_FechaRealizada<'@fecha_fin@'
+
+  )/@diferencia as total_credito,
+  (select ISNULL(count(tr.trans_montoMonedaOriginal),0)
+ from VA_TRANSACCION tr
+ inner join VA_CLIENTExPRODUCTO cp2 on tr.TRANS_CLIENTExPRODUCTO=cp2.CLXPR_IdInterno
+  where tr.TRANS_Entidad=@identidad@ and
+ cp2.CLXPR_Cliente=vc.CLIEN_idInterno and tr.TRANS_TipoTransaccion=2
+ and tr.TRANS_FechaRealizada>'@fecha_ini@'
+ and tr.TRANS_FechaRealizada<'@fecha_fin@'
+
+  )/@diferencia as cantidad_debito,
+    (select ISNULL(count(tr.trans_montoMonedaOriginal),0)
+ from VA_TRANSACCION tr
+ inner join VA_CLIENTExPRODUCTO cp2 on tr.TRANS_CLIENTExPRODUCTO=cp2.CLXPR_IdInterno
+  where tr.TRANS_Entidad=@identidad@ and
+ cp2.CLXPR_Cliente=vc.CLIEN_idInterno and tr.TRANS_TipoTransaccion=1
+ and tr.TRANS_FechaRealizada>'@fecha_ini@'
+ and tr.TRANS_FechaRealizada<'@fecha_fin@'
+
+  )/@diferencia as cantidad_credito,
+	ac.ACECO_Descripcion as actividad_descripcion
+     from VA_CLIENTE vc
+	 inner join KG_ACTIVIDADECONOMICA ac
+	 on vc.CLIEN_ActividadEconomicacliente=ac.ACECO_IdInterno
+    where vc.CLIEN_Entidad=@identidad@
+
+update VA_CLIENTE  set cluster=NULL,cluster2=NULL
+    where CLIEN_Entidad=@identidad@
+
+""",
+  "reset" :"update VA_CLIENTE  set cluster=NULL,cluster2=NULL where CLIEN_Entidad=@identidad@  delete from VA_CLUSTER where CLUS_Entidad=@identidad@ ",
+  "columnas_cluster":["monto_ingreso","monto_egreso","cantidad_debito","cantidad_credito", "total_patrimonio","total_debito","total_credito"],
+"columnas_cluster_categoricas":[0,0,0,0,0,0,0],
+"nombre_cluster_categoricas":[0,0,0,0,0,0,0],
+"categoricas":["actividad"],
+"categoricas_descripcion":["actividad_descripcion"],
+  "llave_consulta" :"id_cliente",
+  "llave_tabla":"CLIEN_idInterno",
+  "tabla":"VA_CLIENTE",
+  "realiza_estudio":1,
+  "minimo_cantidad_estudio":7,
+  "maximo_cantidad_estudio":7,
+"realiza_actualizacion_cluster_mayor":1,  "cantidad_cluster_estudio":[5,6,7,8],
+  "realiza_actualizacion_cluster":0,
+  "cantidad_cluster_actualizacion":5
+
+},
+{
+    "nombre":"Producto",
+    "consulta":"""
+
+declare @diferencia int
+set @diferencia=datediff(MM,'@fecha_ini@','@fecha_fin@')
+
+select pro.PRODU_IdInterno as id_producto,
+pro.PRODU_NichoMercado as nicho,nm.NICME_Codigo as nicho2,
+
+(select ISNULL(sum(tr.trans_montoMonedaOriginal),0)
+ from VA_TRANSACCION tr
+ inner join VA_CLIENTExPRODUCTO cp2 on tr.TRANS_CLIENTExPRODUCTO=cp2.CLXPR_IdInterno
+  where tr.TRANS_Entidad=@identidad@ and
+ cp2.CLXPR_Producto=pro.PRODU_IdInterno and tr.TRANS_TipoTransaccion=2
+ and tr.TRANS_FechaRealizada>'@fecha_ini@'
+ and tr.TRANS_FechaRealizada<'@fecha_fin@'
+
+  )/@diferencia as total_debito,
+(select ISNULL(sum(tr.trans_montoMonedaOriginal),0)
+ from VA_TRANSACCION tr
+ inner join VA_CLIENTExPRODUCTO cp2 on tr.TRANS_CLIENTExPRODUCTO=cp2.CLXPR_IdInterno
+  where tr.TRANS_Entidad=@identidad@ and
+ cp2.CLXPR_Producto=pro.PRODU_IdInterno and tr.TRANS_TipoTransaccion=1
+ and tr.TRANS_FechaRealizada>'@fecha_ini@'
+ and tr.TRANS_FechaRealizada<'@fecha_fin@'
+
+  )/@diferencia as total_credito,
+  (select ISNULL(count(tr.trans_montoMonedaOriginal),0)
+ from VA_TRANSACCION tr
+ inner join VA_CLIENTExPRODUCTO cp2 on tr.TRANS_CLIENTExPRODUCTO=cp2.CLXPR_IdInterno
+  where tr.TRANS_Entidad=@identidad@ and
+ cp2.CLXPR_Producto=pro.PRODU_IdInterno and tr.TRANS_TipoTransaccion=2
+ and tr.TRANS_FechaRealizada>'@fecha_ini@'
+ and tr.TRANS_FechaRealizada<'@fecha_fin@'
+
+  )/@diferencia as cantidad_debito,
+(select ISNULL(count(tr.trans_montoMonedaOriginal),0)
+ from VA_TRANSACCION tr
+ inner join VA_CLIENTExPRODUCTO cp2 on tr.TRANS_CLIENTExPRODUCTO=cp2.CLXPR_IdInterno
+  where tr.TRANS_Entidad=@identidad@ and
+ cp2.CLXPR_Producto=pro.PRODU_IdInterno and tr.TRANS_TipoTransaccion=1
+ and tr.TRANS_FechaRealizada>'@fecha_ini@'
+ and tr.TRANS_FechaRealizada<'@fecha_fin@'
+
+  )/@diferencia as cantidad_credito
+ from KP_PRODUCTO pro
+inner join KG_NICHOMERCADO nm
+on pro.PRODU_NichoMercado=nm.NICME_IdInterno
+where pro.PRODU_Entidad=@identidad@
+
+
+
+
+""",
+  "reset":"select 1",
+"columnas_cluster":["nicho","cantidad_debito","cantidad_credito","total_debito","total_credito"],
+"columnas_cluster_categoricas":[1,0,0,0,0],
+"nombre_cluster_categoricas":['nicho2',0,0,0,0],
+"categoricas":['nicho'],
+"categoricas_descripcion":["nicho2"],
+  "llave_consulta" :"id_producto",
+  "llave_tabla":"PRODU_IdInterno",
+  "tabla":"KP_PRODUCTO",
+  "realiza_estudio":1,
+  "minimo_cantidad_estudio":5,
+  "maximo_cantidad_estudio":5,
+  "cantidad_cluster_estudio":[3,4,5],
+"realiza_actualizacion_cluster_mayor":1,
+  "realiza_actualizacion_cluster":0,
+  "cantidad_cluster_actualizacion":4
+
+},
+{
+    "nombre":"Jurisdiccion",
+    "consulta":"""
+declare @diferencia int
+set @diferencia=datediff(MM,'@fecha_ini@','@fecha_fin@')
+
+   select jur.JURIS_idInterno as id_jurisdiccion,
+ cj.CARJU_RiesgoIndiceTransparecia as riesgo_indice_transaparencia,
+ cj.CARJU_RiesgoCultivoIlicito as riesgo_ilicito,
+ cj.CARJU_RiesgoActosTerroristas as riesgo_terrorista,
+ cj.CARJU_RiesgoZonaFronteriza as riesgo_fronteriza,
+ cj.CARJU_RiesgoDeZonaFranca as riesgo_franca,
+ cj.CARJU_AsentamientoFARCDepartamento as riesgo_farc,
+ cj.CARJU_PresenciaGruposArmados as riesgo_armados,
+(select ISNULL(sum(tr.trans_montoMonedaOriginal),0)
+ from VA_TRANSACCION tr where tr.TRANS_Entidad=@identidad@ and
+ tr.TRANS_CARACTERISTICAJURISDICCION=cj.CARJU_IdInterno and tr.TRANS_TipoTransaccion=2
+ and tr.TRANS_FechaRealizada>'@fecha_ini@'
+ and tr.TRANS_FechaRealizada<'@fecha_fin@'
+
+)/@diferencia as total_debito,
+(select ISNULL(sum(tr.trans_montoMonedaOriginal),0)
+ from VA_TRANSACCION tr where tr.TRANS_Entidad=@identidad@ and
+ tr.TRANS_CARACTERISTICAJURISDICCION=cj.CARJU_IdInterno and tr.TRANS_TipoTransaccion=1
+ and tr.TRANS_FechaRealizada>'@fecha_ini@'
+ and tr.TRANS_FechaRealizada<'@fecha_fin@'
+
+)/@diferencia as total_credito,
+(select ISNULL(count(tr.trans_montoMonedaOriginal),0)
+ from VA_TRANSACCION tr where tr.TRANS_Entidad=@identidad@ and
+ tr.TRANS_CARACTERISTICAJURISDICCION=cj.CARJU_IdInterno and tr.TRANS_TipoTransaccion=2
+ and tr.TRANS_FechaRealizada>'@fecha_ini@'
+ and tr.TRANS_FechaRealizada<'@fecha_fin@'
+
+)/@diferencia as cantidad_debito,
+(select ISNULL(count(tr.trans_montoMonedaOriginal),0)
+ from VA_TRANSACCION tr where tr.TRANS_Entidad=@identidad@ and
+ tr.TRANS_CARACTERISTICAJURISDICCION=cj.CARJU_IdInterno and tr.TRANS_TipoTransaccion=1
+ and tr.TRANS_FechaRealizada>'@fecha_ini@'
+ and tr.TRANS_FechaRealizada<'@fecha_fin@'
+
+)/@diferencia as cantidad_credito
+  from KG_CARACTERISTICAJURISDICCION cj
+ inner join KP_JURISDICCION jur
+ on cj.CARJU_IdInterno=jur.JURIS_Caracteristica
+where jur.JURIS_Entidad=@identidad@
+
+
+""",
+ "reset" :"update KP_JURISDICCION   set cluster=NULL,cluster2=NULL    where JURIS_Entidad=@identidad@",
+ "columnas_cluster":["riesgo_indice_transaparencia","riesgo_ilicito","riesgo_terrorista","riesgo_franca","riesgo_farc","riesgo_armados","cantidad_debito","cantidad_credito","total_debito","total_credito"],
+"columnas_cluster_categoricas":[0,0,0,0,0,0,0,0,0,0],
+"nombre_cluster_categoricas":[0,0,0,0,0,0,0,0,0,0],
+"categoricas":[],
+"categoricas_descripcion":[],
+  "llave_consulta" :"id_jurisdiccion",
+  "llave_tabla":"JURIS_idInterno",
+  "tabla":"KP_JURISDICCION",
+  "realiza_estudio":0,
+  "minimo_cantidad_estudio":10,
+  "maximo_cantidad_estudio":10,
+  "cantidad_cluster_estudio":[4],
+"realiza_actualizacion_cluster_mayor":0,
+  "realiza_actualizacion_cluster":1,
+  "cantidad_cluster_actualizacion":4
+
+},
+{
+    "nombre":"Canal",
+    "consulta":"""
+declare @diferencia int
+set @diferencia=datediff(MM,'@fecha_ini@','@fecha_fin@')
+
+select  CANAL_idInterno as id_canal,CANAL_Caracteristica as caracteristica,CANAL_Caracteristica as caracteristica2,
+CANAL_Naturaleza as naturaleza,CANAL_Naturaleza as naturaleza2,CANAL_Titularidad as titularidad,CANAL_Titularidad as titularidad2,
+(select ISNULL(sum(tr.trans_montoMonedaOriginal),0)
+ from VA_TRANSACCION tr where tr.TRANS_Entidad=@identidad@ and
+ tr.TRANS_Canal=cn.CANAL_idInterno and tr.TRANS_TipoTransaccion=2
+ and tr.TRANS_FechaRealizada>'@fecha_ini@'
+ and tr.TRANS_FechaRealizada<'@fecha_fin@'
+
+)/@diferencia as total_debito,
+(select ISNULL(sum(tr.trans_montoMonedaOriginal),0)
+ from VA_TRANSACCION tr where tr.TRANS_Entidad=@identidad@ and
+ tr.TRANS_Canal=cn.CANAL_idInterno and tr.TRANS_TipoTransaccion=1
+ and tr.TRANS_FechaRealizada>'@fecha_ini@'
+ and tr.TRANS_FechaRealizada<'@fecha_fin@'
+
+)/@diferencia as total_credito,
+(select ISNULL(count(tr.trans_montoMonedaOriginal),0)
+ from VA_TRANSACCION tr where tr.TRANS_Entidad=@identidad@ and
+ tr.TRANS_Canal=cn.CANAL_idInterno and tr.TRANS_TipoTransaccion=2
+ and tr.TRANS_FechaRealizada>'@fecha_ini@'
+ and tr.TRANS_FechaRealizada<'@fecha_fin@'
+
+)/@diferencia as cantidad_debito,
+(select ISNULL(count(tr.trans_montoMonedaOriginal),0)
+ from VA_TRANSACCION tr where tr.TRANS_Entidad=@identidad@ and
+ tr.TRANS_Canal=cn.CANAL_idInterno and tr.TRANS_TipoTransaccion=1
+ and tr.TRANS_FechaRealizada>'@fecha_ini@'
+ and tr.TRANS_FechaRealizada<'@fecha_fin@'
+
+)/@diferencia as cantidad_credito
+  from KP_CANAL cn
+  where CANAL_Entidad=@identidad@
+
+
+
+""",
+"reset" :"update KP_CANAL  set cluster=NULL,cluster2=NULL where CANAL_Entidad=@identidad@",
+"columnas_cluster":["caracteristica","naturaleza","titularidad","total_debito","total_credito","cantidad_debito","cantidad_credito"],
+"columnas_cluster_categoricas":[1,1,1,0,0,0,0],
+"nombre_consulta_categoricas":[0,0,0,0,0,0,0,0,0,0,0],
+"nombre_cluster_categoricas":["caracteristica2","naturaleza2","titularidad2",0,0,0,0],
+"categoricas":[],
+"categoricas_descripcion":[],
+  "llave_consulta" :"id_canal",
+  "llave_tabla":"CANAL_idInterno",
+  "tabla":"KP_CANAL",
+  "realiza_estudio":1,
+  "minimo_cantidad_estudio":7,
+  "maximo_cantidad_estudio":7,
+  "cantidad_cluster_estudio":[2,3],
+"realiza_actualizacion_cluster_mayor":1,
+  "realiza_actualizacion_cluster":0,
+  "cantidad_cluster_actualizacion":4
+
+}
+]

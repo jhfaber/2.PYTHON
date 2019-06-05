@@ -1,0 +1,31 @@
+{
+  "configuracion": {
+    "asociados": {
+      "archivo": "ASOCIADOS.xlsx",
+      "config": "asociados.json"
+    },
+    "canales": {
+      "archivo": "CANALES.xlsx",
+      "config": "canales.json"
+    },
+    "productos": {
+      "archivo": "PRODUCTOS.xlsx",
+      "config": "productos.json"
+    },
+    "asociadosxproductos": {
+      "archivo": "ASOCIADOSxPRODUCTOS.xlsx",
+      "config": "asociadosxproductos.json"
+    },
+    "transacciones": {
+      "archivo": "TRANSACCIONES.xlsx",
+      "config": "transacciones.json"
+    },
+    "jurisdicciones": {
+      "archivo": "JURISDICCIONES.xlsx",
+      "config": "jurisdicciones.json"
+    }
+  },
+  "orden": [
+    "asociados","canales","productos","jurisdicciones","asociadosxproductos","transacciones"
+  ]
+}
